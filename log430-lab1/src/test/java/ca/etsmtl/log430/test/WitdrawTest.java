@@ -32,8 +32,9 @@ public class WitdrawTest {
 	      balance.setBalances(new Money(0), new Money(0));
 	      
 	     Status status = simBank.handleMessage(m, balance);
-	    
+	     
 	     assertEquals(true,status.isSuccess());
+	     assertTrue(new Money(980).toString().equals(balance.getTotal().toString()));
 	    }
 	    
 	    @Test

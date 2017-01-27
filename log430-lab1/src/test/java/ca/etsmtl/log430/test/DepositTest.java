@@ -33,7 +33,7 @@ public class DepositTest {
 	      balance.setBalances(new Money(0), new Money(0));
 	      
 	     Status status = simBank.handleMessage(m, balance);
-	    
+	     
 	     assertEquals(true,status.isSuccess());
 	    }
 	  
@@ -58,7 +58,8 @@ public class DepositTest {
 	      balance.setBalances(new Money(0), new Money(0));
 	      
 	     Status status = simBank.handleMessage(m, balance);
-	    
+	     
+	     assertTrue(new Money(1020).toString().equals(balance.getTotal().toString()));
 	     assertEquals(true,status.isSuccess());
 	    }
 	    

@@ -34,6 +34,7 @@ public class InquiryTest {
 	      
 	     Status status = simBank.handleMessage(m, balance);
 	    
+	     assertTrue(new Money(1000).toString().equals(balance.getTotal().toString()));
 	     assertEquals(true,status.isSuccess());
 	    }
 	  
