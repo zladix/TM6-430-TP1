@@ -31,7 +31,7 @@ public class TransferTest {
 	      
 	     Status status = simBank.handleMessage(m, balance);
 	    
-	     assertEquals(false,status.isSuccess());	
+	     assertEquals(false,status.isSuccess());
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class TransferTest {
 	      
 	     Status status = simBank.handleMessage(m, balance);
 	    
-	     assertEquals(false,status.isSuccess());	
+	     assertEquals(false,status.isSuccess());
 	}
 	
 	@Test
@@ -62,12 +62,14 @@ public class TransferTest {
 	public void transferSuccess() {
 		SimulatedBank simBank = new SimulatedBank();
 	      
-	      Message m = new Message(3, myCard, 42, 123, 0, 1, money);
+	      Message m = new Message(3, myCard, 42, 123, 1,2 , money);
 	      balance.setBalances(new Money(100), new Money(100));
 	      
 	     Status status = simBank.handleMessage(m, balance);
+	     System.out.println(balance.getTotal());
 	    
 	     assertEquals(true,status.isSuccess());	
+	     assertTrue(new Money(980).toString().equals(balance.getTotal().toString()));
 	}
 
 }
