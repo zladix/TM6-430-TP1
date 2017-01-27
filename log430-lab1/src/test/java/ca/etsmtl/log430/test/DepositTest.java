@@ -2,6 +2,7 @@ package ca.etsmtl.log430.test;
 import static org.junit.Assert.*;
 import org.junit.*;
 
+import edu.gordon.atm.ATM;
 import edu.gordon.banking.Balances;
 import edu.gordon.banking.Card;
 import edu.gordon.banking.Message;
@@ -12,7 +13,7 @@ import edu.gordon.simulation.SimulatedBank;
 /**
  * Unit test for simple App.
  */
-public class WitdrawTest {
+public class DepositTest {
 	    static Card myCard;
 	    static Money money;
 	    static Balances balance;
@@ -25,10 +26,35 @@ public class WitdrawTest {
 	    }
 	    
 	    @Test
-	    public void witdrawTest() {
+	    public void depositTest() {
 	      SimulatedBank simBank = new SimulatedBank();
 	      
-	      Message m = new Message(0, myCard, 42, 123, 1, -1, money);
+	      Message m = new Message(1, myCard, 42, 123, -1, 1, money);
+	      balance.setBalances(new Money(0), new Money(0));
+	      
+	     Status status = simBank.handleMessage(m, balance);
+	    
+	     assertEquals(true,status.isSuccess());
+	    }
+	  
+	    @Test
+	    public void depositInvalidCard(){
+	        SimulatedBank simBank = new SimulatedBank();
+		      
+		      Message m = new Message(1, new Card(0), 42, 123, -1, 1, money);
+		      balance.setBalances(new Money(0), new Money(0));
+		      
+		     Status status = simBank.handleMessage(m, balance);
+		    
+		     assertEquals(false,status.isSuccess());
+	  }
+	    
+	    
+	    @Test
+	    public void completeDepositTest() {
+	      SimulatedBank simBank = new SimulatedBank();
+	      
+	      Message m = new Message(2, myCard, 42, 123, -1, 1, money);
 	      balance.setBalances(new Money(0), new Money(0));
 	      
 	     Status status = simBank.handleMessage(m, balance);
@@ -36,29 +62,19 @@ public class WitdrawTest {
 	     assertEquals(true,status.isSuccess());
 	    }
 	    
-	    @Test
-	    public void witdrawNegativeBalance() {
-	      SimulatedBank simBank = new SimulatedBank();
-	      
-	      Message m = new Message(0, myCard, 42, 123, 1, -1, new Money(1000000));
-	      balance.setBalances(new Money(0), new Money(0));
-	      
-	     Status status = simBank.handleMessage(m, balance);
-	    
-	     assertEquals(false,status.isSuccess());
-	    }
 	    
 	    @Test
-	    public void witdrawInvalidCard(){
+	    public void completeDepositInvalidCardTest(){
 	        SimulatedBank simBank = new SimulatedBank();
 		      
-		      Message m = new Message(0, new Card(0), 42, 123, 1, -1, new Money(1000000));
+		      Message m = new Message(2, new Card(0), 42, 123, -1, 1, money);
 		      balance.setBalances(new Money(0), new Money(0));
 		      
 		     Status status = simBank.handleMessage(m, balance);
 		    
 		     assertEquals(false,status.isSuccess());
-	    	
-	    }
+	  }
+	    
+	    
 	    
 }
