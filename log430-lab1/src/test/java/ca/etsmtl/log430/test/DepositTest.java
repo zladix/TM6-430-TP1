@@ -2,7 +2,7 @@ package ca.etsmtl.log430.test;
 import static org.junit.Assert.*;
 import org.junit.*;
 
-import edu.gordon.atm.ATM;
+import edu.gordon.atm.physical.ATM;
 import edu.gordon.banking.Balances;
 import edu.gordon.banking.Card;
 import edu.gordon.banking.Message;
