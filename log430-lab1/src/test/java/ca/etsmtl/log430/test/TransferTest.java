@@ -5,7 +5,6 @@ import org.junit.*;
 import edu.gordon.atm.ATM;
 import edu.gordon.atm.CustomerConsole;
 import edu.gordon.atm.Session;
-import edu.gordon.atm.transaction.*;
 import edu.gordon.banking.*;
 import edu.gordon.simulation.SimulatedBank;
 import edu.gordon.simulation.Simulation;
