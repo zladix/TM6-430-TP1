@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import edu.gordon.atm.ATM;
-import edu.gordon.atm.CustomerConsole;
+import edu.gordon.atm.sCustomerConsole;
 import edu.gordon.atm.Session;
 import edu.gordon.banking.*;
 import edu.gordon.simulation.SimulatedBank;
