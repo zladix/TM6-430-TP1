@@ -1,0 +1,73 @@
+package edu.gordon.simulation;
+
+import edu.gordon.banking.Balances;
+import edu.gordon.banking.Message;
+import edu.gordon.banking.Status;
+
+public class HandleTransactionEvent {
+    public Balances balances;
+    public Status status;
+    public Message message;
+    
+   public HandleTransactionEvent(Balances b, Message m){
+      this.balances = b;
+      this.message = m;
+      this.status = new Success();
+   }
+   
+   
+   /** Representation for status of a transaction that succeeded
+    */
+   private static class Success extends Status
+   {
+       public boolean isSuccess()
+       {
+           return true;
+       }
+       
+       public boolean isInvalidPIN()
+       {
+           return false;
+       }
+       
+       public String getMessage()
+       {
+           return null;
+       }
+   }
+   
+   /** Representation for status of a transaction that failed (for reason other than
+    *  invalid PIN)
+    */
+   private static class Failure extends Status
+   {
+       /** Constructor
+        *
+        *  @param message description of the failure
+        */
+       public Failure(String message)
+       {
+           this.message = message;
+       }
+       
+       public boolean isSuccess()
+       {
+           return false;
+       }
+       
+       public boolean isInvalidPIN()
+       {
+           return false;
+       }
+       
+       public String getMessage()
+       {
+           return message;
+       }
+       
+       private String message;
+   }
+
+   
+
+}
