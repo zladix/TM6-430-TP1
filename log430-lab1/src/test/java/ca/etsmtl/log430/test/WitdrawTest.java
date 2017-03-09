@@ -6,8 +6,8 @@ import edu.gordon.banking.Balances;
 import edu.gordon.banking.Card;
 import edu.gordon.banking.Message;
 import edu.gordon.banking.Money;
+import edu.gordon.banking.SimulatedBank;
 import edu.gordon.banking.Status;
-import edu.gordon.simulation.SimulatedBank;
 
 /**
  * Unit test for simple App.
