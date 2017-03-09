@@ -4,10 +4,12 @@ import org.junit.*;
 
 import edu.gordon.banking.Balances;
 import edu.gordon.banking.Card;
+import edu.gordon.banking.HandleTransactionEvent;
 import edu.gordon.banking.Message;
 import edu.gordon.banking.Money;
 import edu.gordon.banking.SimulatedBank;
 import edu.gordon.banking.Status;
+import edu.gordon.simulation.AtmBus;
 
 /**
  * Unit test for simple App.
@@ -22,16 +24,18 @@ public class WitdrawTest {
 	        myCard = new Card(1);
 	        money = new Money(20);
 	        balance = new Balances();
+	        AtmBus.getInstance().atmBus.register(new SimulatedBank());
 	    }
 	    
 	    @Test
 	    public void witdrawTest() {
-	      SimulatedBank simBank = new SimulatedBank();
-	      
 	      Message m = new Message(0, myCard, 42, 123, 1, -1, money);
 	      balance.setBalances(new Money(0), new Money(0));
 	      
-	     Status status = simBank.handleMessage(m, balance);
+ HandleTransactionEvent Event = new HandleTransactionEvent(balance,m);
+	      
+	      AtmBus.getInstance().atmBus.post(Event);
+	      Status status = Event.status;
 	     
 	     assertEquals(true,status.isSuccess());
 	     assertTrue(new Money(980).toString().equals(balance.getTotal().toString()));
@@ -44,7 +48,9 @@ public class WitdrawTest {
 	      Message m = new Message(0, myCard, 42, 123, 1, -1, new Money(1000000));
 	      balance.setBalances(new Money(0), new Money(0));
 	      
-	     Status status = simBank.handleMessage(m, balance);
+ HandleTransactionEvent Event = new HandleTransactionEvent(balance,m);
+	      AtmBus.getInstance().atmBus.post(Event);
+	      Status status = Event.status;
 	    
 	     assertEquals(false,status.isSuccess());
 	    }
@@ -56,7 +62,10 @@ public class WitdrawTest {
 		      Message m = new Message(0, new Card(0), 42, 123, 1, -1, new Money(1000000));
 		      balance.setBalances(new Money(0), new Money(0));
 		      
-		     Status status = simBank.handleMessage(m, balance);
+		      HandleTransactionEvent Event = new HandleTransactionEvent(balance,m);
+		      
+		      AtmBus.getInstance().atmBus.post(Event);
+		      Status status = Event.status;
 		    
 		     assertEquals(false,status.isSuccess());
 	    	
