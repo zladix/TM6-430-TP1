@@ -1,4 +1,4 @@
-package edu.gordon.atm;
+package edu.gordon.simulation;
 
 import com.google.common.eventbus.EventBus;
 

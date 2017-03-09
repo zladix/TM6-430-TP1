@@ -1,8 +1,4 @@
-package edu.gordon.simulation;
-
-import edu.gordon.banking.Balances;
-import edu.gordon.banking.Message;
-import edu.gordon.banking.Status;
+package edu.gordon.banking;
 
 public class HandleTransactionEvent {
     public Balances balances;
