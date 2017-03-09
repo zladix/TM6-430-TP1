@@ -12,7 +12,7 @@ public class HandleTransactionEvent {
    public HandleTransactionEvent(Balances b, Message m){
       this.balances = b;
       this.message = m;
-      this.status = new Success();
+      this.status = null;
    }
    
    
